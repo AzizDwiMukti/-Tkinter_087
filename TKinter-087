@@ -1,0 +1,87 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Fungsi untuk memvalidasi input dan menampilkan hasil prediksi
+def hasil_prediksi():
+    try:
+        # Memeriksa apakah semua input valid
+        for entry in input_nilai:
+            nilai = int(entry.get())
+            if not (0 <= nilai <= 100):
+                raise ValueError("Nilai harus antara 0 - 100.")
+        # Jika valid, menampilkan hasil prediksi
+        label_hasil.config(
+            text="Prediksi Prodi: Teknologi Informasi",
+            font=("Verdana", 12, "bold"),
+            fg="#00A36C"  # Warna hijau untuk hasil
+        )
+    except ValueError as ve:
+        # Jika ada kesalahan input, tampilkan pesan error
+        messagebox.showerror("Input Error", "Pastikan input adalah angka antara 0 - 100.")
+
+# Membuat jendela utama
+root = tk.Tk()
+root.title("Aplikasi Prediksi Prodi Pilihan")
+root.geometry("900x500")
+root.configure(bg="#F5F5DC")  # Warna latar belakang krem
+
+# Membuat label judul dengan warna
+label_judul = tk.Label(
+    root, 
+    text="Aplikasi Prediksi Prodi Pilihan", 
+    font=("Arial", 19, "bold"), 
+    fg="#2B65EC",  # Warna biru tua
+    bg="#F5F5DC"
+)
+label_judul.pack(pady=20)
+
+# Membuat input nilai mata pelajaran dengan warna
+input_nilai = []
+for i in range(10):
+    label_mata_pelajaran = tk.Label(
+        root, 
+        text=f"Nilai Mata Pelajaran {i+1}:", 
+        font=("Arial", 11), 
+        fg="#8B0000",  # Warna merah tua
+        bg="#F5F5DC"
+    )
+    label_mata_pelajaran.pack(pady=5)
+    
+    entry_nilai = tk.Entry(
+        root, 
+        font=("Arial", 12), 
+        bg="#FFFFE0",  # Warna latar belakang kuning muda
+        fg="#000000",  # Warna teks hitam
+        highlightbackground="#DAA520",  # Warna border kuning emas
+        highlightthickness=2
+    )
+    entry_nilai.pack(pady=5)
+    input_nilai.append(entry_nilai)
+
+# Membuat tombol untuk hasil prediksi dengan warna
+button_prediksi = tk.Button(
+    root, 
+    text="Hasil Prediksi", 
+    command=hasil_prediksi, 
+    font=("Arial", 13, "bold"), 
+    bg="#32CD32",  # Warna hijau terang
+    fg="#FFFFFF",  # Warna teks putih
+    activebackground="#228B22",  # Warna hijau gelap saat tombol ditekan
+    activeforeground="#FFFFFF",
+    relief="raised",
+    bd=5
+)
+button_prediksi.pack(pady=20)
+
+# Membuat label untuk menampilkan hasil prediksi dengan warna
+label_hasil = tk.Label(
+    root, 
+    text="Hasil Prediksi:", 
+    font=("Arial", 12, "italic"), 
+    fg="#4B0082",  # Warna ungu tua
+    bg="#F5F5DC"
+)
+label_hasil.pack(pady=10)
+
+# Menjalankan aplikasi
+root.mainloop()
